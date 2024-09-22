@@ -1,5 +1,11 @@
+import os
 import toml
 from web3 import Web3
+from dotenv import load_dotenv
+
+
+# Load environment variables
+load_dotenv()
 
 
 def get_balance(network_name):
@@ -10,7 +16,7 @@ def get_balance(network_name):
     web3 = Web3(Web3.HTTPProvider(rpc_url))
 
     if web3.is_connected():
-        print(f"Connected to {network_name}")
+        print(f"\nConnected to {network_name}")
         # Get balance (in wei) and convert to ether or matic
         balance_wei = web3.eth.get_balance(wallet_address)
         balance_eth = web3.from_wei(balance_wei, 'ether')
@@ -24,8 +30,8 @@ wallet_config = toml.load("../config/config.toml")
 blockchain_config = toml.load("../blockchain/blockchain.toml")
 
 # Get wallet info
-wallet_address = wallet_config["wallet"]["metamask"]['address']
-private_key = wallet_config["wallet"]["metamask"]['private_key']
+wallet_address = os.getenv("WALLET_ADDRESS")
+private_key = os.getenv("PRIVATE_KEY")
 
 if __name__ == "__main__":
 
