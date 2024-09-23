@@ -3,6 +3,10 @@ import os
 from dotenv import load_dotenv
 from utils.utils import load_config
 
+from logs.logger import Logger
+
+logger = Logger()
+
 
 class Wallet:
 
@@ -28,7 +32,7 @@ class Wallet:
         if not self.web3.is_connected():
             raise ConnectionError(f"Unable to connect to: {self.provider}")
 
-        print(f"Connected to: {self.provider}")
+        logger.info(f"Connected to: {self.provider}")
 
     def set_provider(self, provider: str) -> None:
         """Set wallet provider and connect"""
@@ -46,14 +50,14 @@ class Wallet:
 
             self.provider = provider
             self.web3 = web3_instance
-            print(f"Connected to: {self.provider}")
+            logger.info(f"Connected to: {self.provider}")
 
         except ConnectionError as e:
-            print(f"Unable to connect to provider {provider}: {e}")
+            logger.error(f"Unable to connect to provider {provider}: {e}")
             raise
 
         except Exception as e:
-            print(f"Unexpected error in provider configuration: {e}")
+            logger.error(f"Unexpected error in provider configuration: {e}")
             raise
 
     def get_balance(self):
@@ -65,5 +69,5 @@ class Wallet:
             balance_eth = self.web3.from_wei(balance_wei, 'ether')
             return balance_eth
         except (Exception,) as e:
-            print(f"Unable to get balance: {e}")
+            logger.error(f"Unable to get balance: {e}")
             return None
