@@ -1,0 +1,9 @@
+[networks]
+
+[networks.ethereum]
+rpc_url = "https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID"
+chain_id = 1
+
+[networks.polygon]
+rpc_url = "https://polygon-rpc.com"
+chain_id = 137
