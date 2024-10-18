@@ -2,8 +2,18 @@
 
 [networks.ethereum]
 rpc_url = "https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID"
+coingecko_url = "https://api.coingecko.com/api/v3/simple/token_price/ethereum"
 chain_id = 1
+
+[networks.ethereum.tokens]
+WETH = ''
+USDT = ''
 
 [networks.polygon]
 rpc_url = "https://polygon-rpc.com"
+coingecko_url = "https://api.coingecko.com/api/v3/simple/token_price/polygon-pos"
 chain_id = 137
+
+[networks.polygon.tokens]
+WETH = '0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619'
+USDT = '0xc2132D05D31c914a87C6611C10748AEb04B58e8F'
